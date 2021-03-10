@@ -1,0 +1,112 @@
+swagger: '2.0'
+info:
+  title: todos
+  version: '1.0'
+host: 'localhost:4010'
+schemes:
+  - http
+produces:
+  - application/json
+consumes:
+  - application/json
+paths:
+  /todos:
+    get:
+      summary: List All todos
+      tags: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Todos'
+      operationId: get-todos
+      parameters: []
+    post:
+      summary: update todo
+      operationId: post-todos
+      responses:
+        '200':
+          description: OK
+          examples: {}
+          schema:
+            $ref: '#/definitions/Todos'
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              id:
+                type: number
+              title:
+                type: string
+              is_deleted:
+                type: boolean
+            required:
+              - id
+              - title
+              - is_deleted
+          x-examples: {}
+  '/todos/{id}':
+    parameters:
+      - type: number
+        name: id
+        in: path
+        required: true
+    put:
+      summary: update todo
+      tags: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties: {}
+      operationId: put-todos-id
+    delete:
+      summary: delete todo
+      tags: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties: {}
+      operationId: delete-todos-id
+    get:
+      summary: get todo
+      operationId: get-todos-id
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Todo'
+          examples: {}
+      description: ''
+definitions:
+  Todos:
+    title: Todos
+    type: array
+    x-examples:
+      example-1:
+        - id: 1
+          title: Reactについて
+          is_deleted: false
+        - id: 2
+          title: Reduxについて
+          is_deleted: false
+        - id: 3
+          title: React-Thunkについて
+          is_deleted: false
+    items:
+      $ref: '#/definitions/Todo'
+  Todo:
+    title: Todo
+    type: object
+    properties:
+      id:
+        type: number
+      title:
+        type: string
+      is_deleted:
+        type: boolean

@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { StylesProvider } from '@material-ui/core/styles'
+import TodoList from './components/TodoList'
+import EditTodo from './components/EditTodo'
+import NewTodo from './components/NewTodo'
+import { readTodos } from './redux/actions/todos'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type Props = {
+  readTodos : () => void
 }
 
-export default App;
+class App extends Component<Props> {
+  componentDidMount () {
+    this.props.readTodos()
+  }
+  
+  render () {
+    return (
+      <StylesProvider injectFirst>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={TodoList} />
+            <Route exact path='/new' component={NewTodo} />
+            <Route exact path='/edit/:id' component={EditTodo} />
+          </Switch>
+        </Router>
+      </StylesProvider>
+    )  
+  }
+}
+
+const mapDispatchToProps = { readTodos }
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(App)

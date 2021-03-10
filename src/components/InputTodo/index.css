@@ -1,0 +1,12 @@
+.new-todo__title {
+  width: 300px;
+}
+
+.new-todo__btns {
+  margin-top: 20px;
+}
+
+.new-todo__btn-back {
+  margin-left: 20px;
+  text-decoration: none;
+}

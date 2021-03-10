@@ -1,0 +1,13 @@
+.todo-list__table {
+  margin-bottom: 30px;
+}
+
+.todo-list__cell {
+  width: 80px;
+  text-align: center;
+}
+
+.todo-list__link {
+  margin-top: 30px;
+  text-decoration: none;
+}
